@@ -1,18 +1,23 @@
-import { useState } from 'preact/hooks'
-import './app.css'
-import Home from './components/Home'
-import { Route, Routes } from 'react-router-dom'
+import { useState } from "preact/hooks";
+import "./app.scss";
+import { Route, Routes } from "react-router-dom";
+import Navigation from "./components/navigation/Navigation";
+import LandingPage from "./components/landingPage/LandingPage";
+import Home from "./components/home/Home";
+import { useSelector } from 'react-redux'
+
 
 export function App() {
-  const [count, setCount] = useState(0)
+  const user = useSelector((state)=> state.user.isAuthenticated)
 
+  
   return (
     <>
-   <h1>Hello</h1>
-   <Routes>
-    <Route path="/" element={<Home/>}/>
-    {/* <Route path="/" element={<Home/>}/> */}
-   </Routes>
+     {user && <Navigation />}
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/home" element={<Home/>}/>
+      </Routes>
     </>
-  )
+  );
 }

@@ -1,5 +1,5 @@
 import { render } from "preact";
-import "./index.css";
+import "./index.scss";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 import { BrowserRouter } from 'react-router-dom';
