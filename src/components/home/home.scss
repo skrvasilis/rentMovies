@@ -1,0 +1,128 @@
+.homeContainer {
+
+    background-color: black;
+    color           : white;
+
+    .searchContainer {
+        padding-top: 2rem;
+        display: flex;
+        width: 100%;
+        h2 {
+           flex-basis:  15%;
+           align-self: center;
+           text-align: end;
+           padding-right: 5px;
+           font-size: 1.7rem;
+        }
+
+        .css-b62m3t-container {
+            flex-basis: 60%;
+            color: black;
+
+        }
+
+        button {
+            flex-basis: 25%;
+            color: white;
+            font-size: 2rem;
+            background-color: red;
+            border-radius: 10px;
+            border: none;
+            box-shadow: 1px 1px 5px rgba(255, 255, 255, 0.427);
+        }
+
+
+
+    }
+
+    .moviesContainer {
+        display              : grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap                  : 20px;
+        padding              : 50px 100px;
+        background-color     : black;
+        color                : white;
+
+
+
+        .movieCard {
+            border-radius: 8px;
+            box-shadow   : 0 4px 8px rgba(255, 255, 255, 0.1);
+            padding      : 10px;
+            transition   : transform 0.2s;
+            cursor       : pointer;
+
+            h3 {
+                text-decoration: underline;
+                font-size      : 1.5rem;
+            }
+
+            &:hover {
+                transform: scale(1.05);
+            }
+
+
+            img {
+                width        : 100%;
+                height       : auto;
+                max-height   : 333px;
+                object-fit   : cover;
+                border-radius: 8px;
+                margin-bottom: 10px;
+            }
+
+            .movieCardFooter {
+                display        : flex;
+                justify-content: space-between;
+
+
+                h3 {
+                    font-size      : 1.3rem;
+                    text-decoration: none;
+                    font-weight    : bold;
+                    margin         : 5px 3px;
+
+
+
+                }
+
+                @media (max-width: 768px) {
+                    display       : flex;
+                    flex-direction: column;
+                }
+            }
+
+
+        }
+
+        @media (max-width: 768px) {
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            padding              : 50px 50px;
+        }
+
+        @media (max-width: 480px) {
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            padding              : 50px 20px;
+        }
+
+
+    }
+
+    .pages {
+        display        : flex;
+        justify-content: space-between;
+
+        h2 {
+            padding        : 10px 100px;
+            text-decoration: underline;
+            cursor         : pointer;
+            @media (max-width: 768px) {
+                padding              :10px 50px;
+            }
+    
+            @media (max-width: 480px) {
+                padding              : 10px 20px;
+            }
+        }
+    }
+}

@@ -10,10 +10,11 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.5.0",
-    "axios": "^1.7.9",
+    "@smastrom/react-rating": "^1.5.0",
     "preact": "^10.25.0",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.0.2",
+    "react-select": "^5.9.0",
     "redux": "^5.0.1",
     "sass": "^1.83.0"
   },

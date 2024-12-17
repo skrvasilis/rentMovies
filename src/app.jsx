@@ -4,19 +4,19 @@ import { Route, Routes } from "react-router-dom";
 import Navigation from "./components/navigation/Navigation";
 import LandingPage from "./components/landingPage/LandingPage";
 import Home from "./components/home/Home";
-import { useSelector } from 'react-redux'
-
+import { useSelector } from "react-redux";
+import SingleMovie from "./components/singleMovie/SingleMovie";
 
 export function App() {
-  const user = useSelector((state)=> state.user.isAuthenticated)
+  const user = useSelector((state) => state.user.isAuthenticated);
 
-  
   return (
     <>
-     {user && <Navigation />}
+      {user && <Navigation />}
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/home" element={<Home/>}/>
+        <Route path="/home" element={<Home />} />
+        <Route path="movies/:uuid" element={<SingleMovie />} />
       </Routes>
     </>
   );

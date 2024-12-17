@@ -1,0 +1,56 @@
+.singlePageContainer {
+    width           : 100%;
+    background-color: black;
+    min-height      : calc(100vh - 50px);
+    color: white;
+    display: flex;
+    align-items:flex-start;
+    padding: 60px;
+    gap: 30px;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      padding: 10px;
+      align-items: center;
+    }
+
+   
+
+    .movieInfo {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        @media (max-width: 768px) {
+           
+            padding: 10px;
+          }
+
+        .ratingContainer {
+            display: flex;
+            gap: 2rem;
+        }
+
+        ul {
+            list-style: none;
+            display: flex;
+            flex-direction: row;
+        }
+
+        p {
+            font-size: 2rem;
+            max-width: 70%;
+        }
+        button {
+            align-self: flex-start;
+            color: white;
+            font-size: 2rem;
+            background-color: red;
+            padding: 1rem 3rem;
+            border-radius: 10px;
+            border: none;
+            box-shadow: 1px 1px 5px rgba(255, 255, 255, 0.427);
+        }
+    }
+
+}
