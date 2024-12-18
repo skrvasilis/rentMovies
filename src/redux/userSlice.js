@@ -10,6 +10,7 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     login: (state, action) => {
+      console.log("Run in redux")
       state.isAuthenticated = true;
       state.userInfo = action.payload;
     },

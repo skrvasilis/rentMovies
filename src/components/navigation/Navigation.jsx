@@ -2,7 +2,7 @@ import React from "react";
 import "./navigation.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/userSlice";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const Navigation = () => {
   const userInfo = useSelector((state) => state.user.userInfo);
@@ -17,6 +17,7 @@ const Navigation = () => {
     return navigate("/");
   };
 
+
   return (
     <>
       <div className="navigation-bar">
@@ -27,6 +28,9 @@ const Navigation = () => {
             <li>
               {" "}
               <button onClick={logoutUser}>logout </button>{" "}
+            </li>
+            <li>
+              <Link to={"/profile"}>Profile</Link>
             </li>
           </ul>
         </nav>

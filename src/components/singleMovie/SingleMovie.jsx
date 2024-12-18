@@ -1,13 +1,18 @@
 import { useEffect } from "preact/hooks";
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import { getSingleMovie } from "../../helpers/apiCalls";
+import { getSingleMovie, rentMovie } from "../../helpers/apiCalls";
 import "./singlemovie.scss";
 import { Rating, ThinRoundedStar } from "@smastrom/react-rating";
+import Swal from 'sweetalert2/dist/sweetalert2.js';
+
 
 import "@smastrom/react-rating/style.css";
 
 const SingleMovie = () => {
+
+
+
   const myStyles = {
     itemShapes: ThinRoundedStar,
     activeFillColor: "#ffb700",
@@ -27,6 +32,24 @@ const SingleMovie = () => {
   }, []);
 
   console.log(singleMovie);
+
+  const rentThisMovie = async () => {
+    try {
+      console.log(singleMovie.uuid)
+      const res = await rentMovie( access, {movie :singleMovie.uuid})
+      console.log(res)
+      console.log("no error")
+      Swal.fire({
+        title: "Success",
+        text: "You Rented the movie",
+        icon: "success"
+      });
+    } catch (error) {
+      console.log(error)
+      console.log("error")
+    }
+   
+  }
 
   return (
     <div className="singlePageContainer">
@@ -56,7 +79,7 @@ const SingleMovie = () => {
             <p>{singleMovie.description}</p>
             <p>duration : {singleMovie.duration}</p>
 
-            <button>Rent this movie</button>
+            <button onClick={rentThisMovie}>Rent this movie</button>
           </div>
         </>
       )}

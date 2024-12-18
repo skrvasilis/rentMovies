@@ -7,8 +7,9 @@
         padding-top: 2rem;
         display: flex;
         width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
         h2 {
-           flex-basis:  15%;
            align-self: center;
            text-align: end;
            padding-right: 5px;
@@ -16,9 +17,18 @@
         }
 
         .css-b62m3t-container {
-            flex-basis: 60%;
+            max-width: 30%;
+            min-width: 200px;
             color: black;
-
+            margin-right: 2rem;
+           
+        }
+        input {
+            max-width: 30%;
+            min-width: 200px;
+            color: black;
+            margin-right: 2rem;
+            border-radius: 10px;
         }
 
         button {
