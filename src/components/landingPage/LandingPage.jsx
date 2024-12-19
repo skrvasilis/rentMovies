@@ -15,10 +15,13 @@ const LandingPage = () => {
 
   useEffect(() => {
     const access = localStorage.getItem("access");
+
     if (access) {
       navigate("/home");
     }
   }, []);
+
+ 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -80,7 +83,5 @@ const LandingPage = () => {
     </div>
   );
 };
-
-
 
 export default LandingPage;

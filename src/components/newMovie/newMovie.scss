@@ -1,0 +1,87 @@
+.formContainer {
+    min-height      : calc(100vh - 50px);
+    background-color: black;
+    color           : white;
+
+    h1 {
+        text-align: center;
+        padding   : 4rem;
+        font-size : 3rem;
+
+        span {
+            color: red;
+        }
+    }
+
+
+    form {
+        padding-top   : 2rem;
+        display       : flex;
+        flex-direction: column;
+        align-items: center;
+        width         : 50%;
+        min-width: 350px;
+        margin        : auto;
+        padding       : 15px;
+        gap           : 15px;
+        border        : 2px solid rgba(255, 255, 255, 0.28);
+        border-radius: 3px;
+
+        .inputContainer {
+            display       : flex;
+            flex-direction: column;
+            width: 80%;
+            align-items: center;
+
+            label {
+                font-size: 2rem;
+                margin-bottom: 5px;
+            }
+
+            input, .css-b62m3t-container {
+                width        : 90%;
+                font-size: 2rem;
+                color        : black;
+                border-radius: 7px;
+                padding-left : 5px;
+                height       : 50px;
+                outline: none;
+                border: none;
+            }
+            textarea {
+                outline: none;
+                border: none;
+                width        : 90%;
+                color        : black;
+                border-radius: 7px;
+                padding-left : 5px;
+            }
+        }
+
+
+        h2 {
+            align-self   : center;
+            text-align   : end;
+            padding-right: 5px;
+            font-size    : 1.7rem;
+        }
+
+       
+
+
+
+
+
+        input[type=submit] {
+            width: 90%;
+            color           : white;
+            font-size       : 2rem;
+            background-color: red;
+            border-radius   : 10px;
+            border          : none;
+            box-shadow      : 1px 1px 5px rgba(255, 255, 255, 0.427);
+            min-height      : 38px;
+        }
+    }
+
+}

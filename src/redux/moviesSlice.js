@@ -14,9 +14,8 @@ const moviesSlice = createSlice({
     addMovies: (state, action) => {
       state.movies.push(action.payload);
     },
-    // removeMovie: (state, action) => {
-    //   state.movies = state.movies.filter(movie => movie.id !== action.payload);
-    // },
+    watchedMovies: (state, action) => {},
+    rentedMovies: (state, action) => {},
   },
 });
 

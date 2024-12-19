@@ -8,7 +8,6 @@ const Navigation = () => {
   const userInfo = useSelector((state) => state.user.userInfo);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  //Filter params: [category, from-rating, to-rating, from-year, to-year], Order params: orderBy
 
   const logoutUser = () => {
     localStorage.removeItem("access");
@@ -17,11 +16,12 @@ const Navigation = () => {
     return navigate("/");
   };
 
-
   return (
     <>
       <div className="navigation-bar">
-        <h4>MovieNest</h4>
+        <h4>
+          <Link to={"./home"}> MovieNest</Link>
+        </h4>
         <nav>
           <ul>
             <li>welcome {userInfo.first_name}</li>
@@ -31,6 +31,9 @@ const Navigation = () => {
             </li>
             <li>
               <Link to={"/profile"}>Profile</Link>
+            </li>
+            <li>
+              <Link to={"/addMovie"}>Add movie</Link>
             </li>
           </ul>
         </nav>

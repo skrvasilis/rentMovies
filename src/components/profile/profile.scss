@@ -11,6 +11,7 @@
                 border: none;
                 box-shadow: 1px 1px 5px rgba(255, 255, 255, 0.427);
                 margin: 10px 0;
+                cursor: pointer;
     }
 background-color: black;
 color: white;
@@ -20,28 +21,57 @@ min-height: calc(100vh - 50px) ;
 h3 {
     font-size: 3rem;
     margin-bottom: 3rem;
+    text-align: center;
+    border-top: 2px solid rgba(255, 255, 255, 0.271);
+    padding: 1.5rem 0;
 }
 
 .movies {
-
-
-.movieContainer {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 13px;
-    margin-bottom: 2rem;
-    padding-bottom: 2rem;
-    border-bottom: 1px solid gray;
-
-    h2 {
-        font-size: 2rem;
-    }
-    p {
-        font-size: 1.5rem;
-    }
+    flex-wrap: wrap;
+    gap: 2rem;
+    color: white;
+    width: 100%;
    
-}
+
+    .movieContainer {
+        min-height: 200px;
+        width: 30%;
+        min-width: 300px;
+        max-width: 500px;
+        border: 1px solid #ddd; 
+        border-radius: 8px; 
+
+        padding: 16px; 
+        background-color: #16161669; 
+        box-shadow: 0 4px 6px rgba(255, 255, 255, 0.431); 
+        text-align: center;
+        font-family: Arial, sans-serif; 
+      
+        h2 {
+          font-size: 2.5rem; // Slightly larger title
+          margin-bottom: 14px; // Space below title
+        }
+      
+        p {
+          font-size: 1.8rem; // Standard size for paragraph
+          color: #e2e2e2; // Medium gray for secondary text
+          margin-bottom: 12px; // Space below paragraph
+        }
+      
+        button {
+            
+      
+          &:hover {
+            background-color: #540000; // Darker blue on hover
+            transform: scale(1.1);
+          }
+        }
+      }
+      
+    
+
+
 }
 
 }

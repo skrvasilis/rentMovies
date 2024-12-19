@@ -1,34 +1,29 @@
+import axios from "axios";
+import apiClient from "./tokenHandle";
+const access = localStorage.getItem("access");
+
+
 export const loginUser = async (data) => {
   try {
-    const res = await (
-      await fetch("/auth/login/", {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-    ).json();
-
-    return res;
+    const res = await apiClient.post("/auth/login/", data, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    return res.data;
   } catch (error) {
     return error;
   }
 };
 
-export const refreshToken = async (refresh) => {
+export const refreshToken = async (data) => {
   try {
-    const res = await (
-      await fetch("/auth/refresh", {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-    ).json();
-
-    return res;
+    const res = await apiClient.post("/auth/refresh", data, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    return res.data;
   } catch (error) {
     return error;
   }
@@ -36,16 +31,13 @@ export const refreshToken = async (refresh) => {
 
 export const getProfile = async (access) => {
   try {
-    const res = await (
-      await fetch(`rent-store/profile/`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${access}`,
-        },
-      })
-    ).json();
-    return res;
+    const res = await apiClient.get("/rent-store/profile/", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${access}`,
+      },
+    });
+    return res.data;
   } catch (error) {
     return error;
   }
@@ -53,16 +45,17 @@ export const getProfile = async (access) => {
 
 export const getMovies = async (access, pageCount) => {
   try {
-    const res = await (
-      await fetch(`/rent-store/movies/?page=${pageCount}&page_size=20`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${access}`,
-        },
-      })
-    ).json();
-    return res;
+    const res = await apiClient.get(`/rent-store/movies/`, {
+      params: {
+        page: pageCount,
+        page_size: 20,
+      },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${access}`,
+      },
+    });
+    return res.data;
   } catch (error) {
     console.log(error.message);
     return error;
@@ -71,16 +64,13 @@ export const getMovies = async (access, pageCount) => {
 
 export const getSingleMovie = async (access, uuid) => {
   try {
-    const res = await (
-      await fetch(`/rent-store/movies/${uuid}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${access}`,
-        },
-      })
-    ).json();
-    return res;
+    const res = await apiClient.get(`/rent-store/movies/${uuid}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${access}`,
+      },
+    });
+    return res.data;
   } catch (error) {
     console.log(error.message);
     return error;
@@ -89,16 +79,13 @@ export const getSingleMovie = async (access, uuid) => {
 
 export const getCategories = async (access) => {
   try {
-    const res = await (
-      await fetch(`/rent-store/categories`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${access}`,
-        },
-      })
-    ).json();
-    return res;
+    const res = await apiClient.get(`/rent-store/categories`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${access}`,
+      },
+    });
+    return res.data;
   } catch (error) {
     console.log(error.message);
     return error;
@@ -107,16 +94,17 @@ export const getCategories = async (access) => {
 
 export const getSearchedMovies = async (access, filter) => {
   try {
-    const res = await (
-      await fetch(`/rent-store/movies/?${filter}&page_size=20`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${access}`,
-        },
-      })
-    ).json();
-    return res;
+    const res = await apiClient.get(`/rent-store/movies/`, {
+      params: {
+        ...filter,
+        page_size: 20,
+      },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${access}`,
+      },
+    });
+    return res.data;
   } catch (error) {
     console.log(error.message);
     return error;
@@ -124,18 +112,14 @@ export const getSearchedMovies = async (access, filter) => {
 };
 
 export const getCurrentMovies = async (access, fetchUrl) => {
-  console.log("fetchUrl", fetchUrl);
   try {
-    const res = await (
-      await fetch(fetchUrl, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${access}`,
-        },
-      })
-    ).json();
-    return res;
+    const res = await apiClient.get(fetchUrl, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${access}`,
+      },
+    });
+    return res.data;
   } catch (error) {
     console.log(error.message);
     return error;
@@ -143,44 +127,83 @@ export const getCurrentMovies = async (access, fetchUrl) => {
 };
 
 export const rentMovie = async (access, uuid) => {
-  const res = await (
-    await fetch("/rent-store/rentals/", {
-      method: "POST",
-      body: JSON.stringify(uuid),
+  try {
+    const res = await apiClient.post("/rent-store/rentals/", uuid, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${access}`,
       },
-    })
-  ).json();
-
-  return res;
+    });
+    return res.data;
+  } catch (error) {
+    return error;
+  }
 };
 
-
 export const getRentals = async (access) => {
-    const res = await (
-      await fetch("rent-store/rentals/", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${access}`,
-        },
-      })
-    ).json();
-    return res;
+  try {
+    const res = await apiClient.get("/rent-store/rentals/", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${access}`,
+      },
+    });
+    return res.data;
+  } catch (error) {
+    return error;
+  }
 };
 
 export const returnRental = async (rental_uuid, access) => {
-  const res = await (
-    await fetch(`rent-store/rentals/${rental_uuid}`, {
-      method: "PATCH",
+  try {
+    const res = await apiClient.patch(`/rent-store/rentals/${rental_uuid}`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${access}`,
       },
-    })
-  ).json();
-  return res;
+    });
+    return res.data;
+  } catch (error) {
+    return error;
+  }
 };
 
+
+export const updateProfile = async (access, data) => {
+  console.log(JSON.stringify(data))
+  try {
+    const res = await apiClient.patch(`/rent-store/profile/`, data, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${access}`,
+      },
+    });
+    return res.data;
+  } catch (error) {
+    if (error.response) {
+      console.error("Error response:", error.response.data);
+      console.error("Status code:", error.response.status);
+    } else if (error.request) {
+      console.error("No response received:", error.request);
+    } else {
+      console.error("Request setup error:", error.message);
+    }
+    return error;
+  }
+};
+
+
+export const addNewMovie = async (data) => {
+  console.log("The Data", data)
+  try {
+    const res = await apiClient.post("/rent-store/movies/", data, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${access}`,
+      },
+    });
+    return res.data;
+  } catch (error) {
+    return error;
+  }
+};
