@@ -1,18 +1,23 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import "./navigation.scss";
-import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../../redux/userSlice";
 import { useNavigate, Link } from "react-router-dom";
+import { MoviesContext } from "../../context/moviesContext";
+import { getProfile } from "../../helpers/apiCalls";
 
 const Navigation = () => {
-  const userInfo = useSelector((state) => state.user.userInfo);
-  const dispatch = useDispatch();
+  const { user, setUser, setLoggedIn } = useContext(MoviesContext);
+
   const navigate = useNavigate();
 
   const logoutUser = () => {
     localStorage.removeItem("access");
     localStorage.removeItem("refresh");
-    dispatch(logout());
+    setUser({
+      userInfo: {},
+      isAuthenticated: false,
+      isAdmin: false,
+    });
+    setLoggedIn(false);
     return navigate("/");
   };
 
@@ -24,7 +29,7 @@ const Navigation = () => {
         </h4>
         <nav>
           <ul>
-            <li>welcome {userInfo.first_name}</li>
+            <li>welcome {user?.userInfo?.first_name}</li>
             <li>
               {" "}
               <button onClick={logoutUser}>logout </button>{" "}
@@ -32,9 +37,19 @@ const Navigation = () => {
             <li>
               <Link to={"/profile"}>Profile</Link>
             </li>
-            <li>
-              <Link to={"/addMovie"}>Add movie</Link>
-            </li>
+            {user.isAdmin && (
+              <>
+                <li>
+                  <Link to={"/addMovie"}>Add movie</Link>
+                </li>
+                <li>
+                  <Link to={"/chart"}>Chart</Link>
+                </li>
+                <li>
+                  <Link to={"/rentals"}>Rentals</Link>
+                </li>
+              </>
+            )}
           </ul>
         </nav>
       </div>

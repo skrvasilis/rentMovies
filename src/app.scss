@@ -10,3 +10,67 @@ html { font-size: 10px; }
 body {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
+
+.pages {
+    display        : flex;
+    justify-content: space-between;
+
+    h2 {
+        padding        : 10px 100px;
+        text-decoration: underline;
+        cursor         : pointer;
+
+        @media (max-width: 768px) {
+            padding: 10px 50px;
+        }
+
+        @media (max-width: 480px) {
+            padding: 10px 20px;
+        }
+    }
+}
+
+button {
+    cursor: pointer;
+}
+
+
+.rentalsTable {
+    width          : 100%;
+    border-collapse: collapse;
+  
+    th,
+    td {
+      border    : 1px solid #ddd;
+      padding   : 18px;
+      text-align: left;
+      font-size: 1.3rem;
+  
+    }
+  
+    th {
+      background-color: #191818;
+    }
+  
+    .even-row {
+      background-color: #121111;
+    }
+  
+    .odd-row {
+      background-color: #605858;
+    }
+  
+    .return-button {
+      color           : white;
+      font-size       : 1.3rem;
+      padding         : 3px 8px;
+      background-color: transparent;
+      border-radius   : 7px;
+      border          : none;
+      cursor          : pointer;
+  
+      &:hover {
+        background-color: red;
+      }
+    }
+  }

@@ -4,16 +4,12 @@ const access = localStorage.getItem("access");
 
 
 export const loginUser = async (data) => {
-  try {
     const res = await apiClient.post("/auth/login/", data, {
       headers: {
         "Content-Type": "application/json",
       },
     });
     return res.data;
-  } catch (error) {
-    return error;
-  }
 };
 
 export const refreshToken = async (data) => {
@@ -140,9 +136,9 @@ export const rentMovie = async (access, uuid) => {
   }
 };
 
-export const getRentals = async (access) => {
+export const getRentals = async (access, fetchUrl) => {
   try {
-    const res = await apiClient.get("/rent-store/rentals/", {
+    const res = await apiClient.get(fetchUrl, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${access}`,

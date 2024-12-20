@@ -1,16 +1,16 @@
 import { render } from "preact";
 import "./index.scss";
-import { Provider } from "react-redux";
-import store from "./redux/store";
 import { BrowserRouter } from 'react-router-dom';
 import { App } from "./app.jsx";
+import {MoviesProvider} from "./context/moviesContext.js"
 
 
 render(
-  <Provider store={store}>
+ 
+    <MoviesProvider>
     <BrowserRouter>
     <App />
     </BrowserRouter>
-  </Provider>,
+    </MoviesProvider>,
   document.getElementById("app")
 );

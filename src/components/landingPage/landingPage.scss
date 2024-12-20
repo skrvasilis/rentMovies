@@ -38,14 +38,61 @@
                 box-shadow: 1px 1px 5px rgba(255, 255, 255, 0.427);
             }
 
-            form {
-                padding: 20px; 
-                border-radius: 8px; 
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
-                background-color: #1c0808;
-                width: 300px;
+            .login-container {
+                background: #000000ca;
+                padding: 4rem;
+                border-radius: 8px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                width: 100%;
+                max-width: 400px;
+            }
+            
+            .form-title {
+                margin-bottom: 1.5rem;
+                font-size: 1.5rem;
+                text-align: center;
+                color: white;
+            }
+            
+            .form-group {
+                margin-bottom: 1rem;
+            }
+            
+            label {
+                display: block;
+                margin-bottom: 0.5rem;
+                font-weight: bold;
+                color: white;
+            }
+            
+            input {
+                width: 100%;
+                padding: 1.25rem;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                font-size: 1rem;
+            }
+            
+            input:focus {
+                border-color:white;
+                outline: none;
+                box-shadow: 0 0 3px rgba(52, 152, 219, 0.5);
+            }
+            
+            .submit-btn {
+                width: 100%;
+                padding: 0.75rem;
+               margin-top: 1rem;
+                transition: background-color 0.3s;
+            }
+            
+            .submit-btn:hover {
+                background-color: darken(rgb(163, 53, 53), 10%);
             }
 
+            
+
+           
 
         }
     }

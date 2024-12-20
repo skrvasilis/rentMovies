@@ -1,24 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./newMovie.scss";
 import { Controller, useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import Select from "react-select";
 import { addNewMovie } from "../../helpers/apiCalls";
+import { MoviesContext } from "../../context/moviesContext";
 
 const NewMovie = () => {
-  const optionCategories = useSelector((state) => state.categories);
-  const [categoryOptions, setCategoryOptions] = useState({
-    value: "one",
-    label: "one",
-  });
+  const {categories} = useContext(MoviesContext)
+  
 
-  useEffect(() => {
-    (async function () {
-      setCategoryOptions(optionCategories.categories);
-    })();
-  }, []);
-
-  console.log(categoryOptions);
+  
 
   const {
     register,
@@ -65,7 +57,7 @@ const NewMovie = () => {
                 onChange={onChange}
                 isMulti
                 required
-                options={categoryOptions}
+                options={categories}
                 name="categories"
                 placeholder="categories"
               />

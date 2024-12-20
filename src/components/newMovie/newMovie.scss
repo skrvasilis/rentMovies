@@ -73,14 +73,16 @@
 
 
         input[type=submit] {
-            width: 90%;
+            width: 73%;
             color           : white;
+
             font-size       : 2rem;
             background-color: red;
             border-radius   : 10px;
             border          : none;
             box-shadow      : 1px 1px 5px rgba(255, 255, 255, 0.427);
-            min-height      : 38px;
+            min-height      : 50px;
+            margin-top: 1rem;
         }
     }
 

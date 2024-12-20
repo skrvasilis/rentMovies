@@ -1,19 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   getCategories,
   getCurrentMovies,
   getProfile,
+  getRentals,
 } from "../../helpers/apiCalls";
-import { useDispatch, useSelector } from "react-redux";
-import { setMovies } from "../../redux/moviesSlice";
 import placeHolderImage from "../../assets/placeholder.png";
 import "./home.scss";
 import { useNavigate } from "react-router-dom";
 import Select from "react-select";
 import { Controller, useForm } from "react-hook-form";
 
-import { login } from "../../redux/userSlice";
-import { setCategories } from "../../redux/categoriesSlice";
+import { MoviesContext } from "../../context/moviesContext";
 
 const ratingOptions = [
   { value: 1, label: 1 },
@@ -29,12 +27,10 @@ const ratingOptions = [
 ];
 
 const Home = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const movies = useSelector((state) => state.movies);
   const access = localStorage.getItem("access");
-  const [categoryOptions, setCategoryOptions] = useState(null);
-  const [category, setCategory] = useState(null);
+  const [movies, setMovies] = useState([]);
+  const [rentedMovies, setRentedMovies] = useState([]);
   const [nextFetchUrl, setNextFetchUrl] = useState(null);
   const [prevFetchUrl, setPrevFetchUrl] = useState(null);
   const [currentFetchUrl, setCurrentFetchUrl] = useState(() => {
@@ -43,33 +39,23 @@ const Home = () => {
       ? JSON.parse(savedUrl)
       : "rent-store/movies/?page=1&page_size=20/";
   });
-  const optionCategories = useSelector((state)=> state.categories)
+  const { categories, user } = useContext(MoviesContext);
   useEffect(() => {
     localStorage.setItem("currentFetchUrl", JSON.stringify(currentFetchUrl));
-    console.log("I changed category");
     moviesCall();
   }, [currentFetchUrl]);
 
   useEffect(() => {
     (async function () {
-      getUser();
-      
-      setCategoryOptions(optionCategories.categories);
-   
+      const res = await getRentals(access, "rent-store/rentals/?page_size=100");
+       const rentedMoviesTitle = res.results.map((item)=> item.movie)
+      setRentedMovies(rentedMoviesTitle);
     })();
+
     return () => {
       setCurrentFetchUrl("rent-store/movies/?page=1&page_size=20");
     };
   }, []);
-
-  const getUser = async () => {
-    const user = await getProfile(access);
-
-    if (!user.code) {
-      console.log("gotthe user", user);
-      dispatch(login(user));
-    }
-  };
 
   const changePage = (condition) => {
     if (condition === "next") {
@@ -81,8 +67,12 @@ const Home = () => {
 
   const moviesCall = async () => {
     const movies = await getCurrentMovies(access, currentFetchUrl);
-    console.log(movies);
-    dispatch(setMovies(movies.results));
+    console.log("inside moviesCall", rentedMovies);
+    setMovies(movies.results);
+    console.log(movies.results);
+
+    console.log(categories)
+    console.log(user)
 
     movies.next === null
       ? setNextFetchUrl(null)
@@ -91,8 +81,6 @@ const Home = () => {
       ? setPrevFetchUrl(null)
       : setPrevFetchUrl(movies.previous.slice(25));
   };
-
-  console.log(prevFetchUrl);
 
   const movieCLicked = (uuid) => {
     navigate(`/movies/${uuid}`);
@@ -147,7 +135,7 @@ const Home = () => {
             render={({ field: { onChange } }) => (
               <Select
                 onChange={onChange}
-                options={categoryOptions}
+                options={categories}
                 name="category"
                 placeholder="category"
               />
@@ -200,9 +188,9 @@ const Home = () => {
         </form>
       </div>
 
-      {movies.movies && (
+      {movies.length && (
         <section className="moviesContainer">
-          {movies.movies.map((item) => {
+          {movies.map((item) => {
             return (
               <div
                 className="movieCard"
@@ -215,8 +203,12 @@ const Home = () => {
                 />
                 <h3>{item.title}</h3>
                 <div className="movieCardFooter">
-                  {item.categories.map((el) => {
-                    return <h3>{el}</h3>;
+                  {item.categories.map((el,i) => {
+                    if (i<2) {
+                      return <h3>{el}</h3>;
+                    } else {
+                      return null
+                    }
                   })}
                   <div>
                     <h3>{item.pub_date}</h3>
